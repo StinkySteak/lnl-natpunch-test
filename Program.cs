@@ -56,9 +56,12 @@
 
         private void RunHost()
         {
+            Console.WriteLine("Please input the NAT punch relay address:");
+            string inputNatRelayAddress = Console.ReadLine();
+
             _host = new NetPeer();
             _host.Init(true);
-            _host.NatPunch("localhost", 9_000, "helloworld");
+            _host.NatPunch(inputNatRelayAddress, 9_000, "helloworld");
             
             PollUpdate();
         }
@@ -69,11 +72,11 @@
             string inputHostEndPoint = Console.ReadLine();
 
             Console.WriteLine("Please input the NAT punch relay address:");
-            string inputNatEndPoint = Console.ReadLine();
+            string inputNatRelayAddress = Console.ReadLine();
 
             _client = new NetPeer();
             _client.Init(false);
-            _client.NatPunch(inputNatEndPoint, 9_000, inputHostEndPoint);
+            _client.NatPunch(inputNatRelayAddress, 9_000, inputHostEndPoint);
             
             PollUpdate();
         }

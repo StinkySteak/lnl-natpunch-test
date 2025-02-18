@@ -44,6 +44,8 @@ namespace LNLNatPunch
             };
             _netManager.Start(_listenPort);
             _netManager.NatPunchModule.Init(this);
+
+            Console.WriteLine($"NAT Punch relay is started at: {_listenPort}");
         }
 
         public void PollUpdate()
@@ -102,8 +104,8 @@ namespace LNLNatPunch
             }
 
             NATPeer newCandidate = new(localEndPoint, remoteEndPoint);
-            _activePeers.Add(new NATPeerPair() { Token = localEndPoint.ToString(), Peer = newCandidate });
-            Console.WriteLine($"[Relay]: A host is added: {localEndPoint}");
+            _activePeers.Add(new NATPeerPair() { Token = remoteEndPoint.ToString(), Peer = newCandidate });
+            Console.WriteLine($"[Relay]: A host is added: {remoteEndPoint}");
         }
 
         public void OnNatIntroductionSuccess(IPEndPoint targetEndPoint, NatAddressType type, string token)
